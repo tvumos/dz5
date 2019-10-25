@@ -2,6 +2,8 @@
 Библиотечные функции
 """
 import os
+import shutil
+
 
 def show_help():
     print('===================================================')
@@ -25,9 +27,31 @@ def create_dir():
     print("")
     answer = input('Укажите имя создаваемой директории -> ')
     temp_dir = os.path.join(os.getcwd(), answer)
-    if os.path.exists(temp_dir):
-        print("ПРЕДУПРЕЖДЕНИЕ. Указанная директория уже существует. Укажите другое имя")
-    else:
-        os.mkdir(temp_dir)
-        print("Директория успешно создана")
-        print("")
+    try:
+        if os.path.exists(temp_dir):
+            print("ПРЕДУПРЕЖДЕНИЕ. Указанная директория уже существует. Укажите другое имя")
+        else:
+            os.mkdir(temp_dir)
+            print("Директория успешно создана")
+            print("")
+    except:
+        print("ПРЕДУПРЕЖДЕНИЕ. Указаны не допустимые символы в имени директории")
+
+
+def del_file_or_dir():
+    print("")
+    answer = input('Укажите имя файла или папки для удаления -> ')
+    temp_name = os.path.join(os.getcwd(), answer)
+    try:
+        if os.path.exists(temp_name):       # Объект найден
+            if os.path.isfile(temp_name):   # Файл
+                os.remove(temp_name)
+                print("Файл успешно удалён")
+            elif os.path.isdir(temp_name):  # Директория
+                shutil.rmtree(temp_name)
+                print("Директория успешно удалена")
+        else:
+            print("ПРЕДУПРЕЖДЕНИЕ. Указанный файл/директория не найдена в текущей директории")
+    except:
+        print("ОШИБКА. Ошибка удаления файла/папки - отсутствует доступ к объекту")
+

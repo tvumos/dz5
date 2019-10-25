@@ -11,7 +11,7 @@ while True:
     if response == '1':  # Создать папку
         dz_lib.create_dir()
     elif response == '2':  # Удалить (файл/папку)
-        pass
+        dz_lib.del_file_or_dir()
     elif response == '3':  # Копировать (файл/папку)
         pass
     elif response == '4':  # Просмотр содержимого рабочей директории
